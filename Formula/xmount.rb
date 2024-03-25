@@ -21,6 +21,7 @@ class Xmount < Formula
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@3"].opt_lib/"pkgconfig"
 
     system "grep -v 'read -p' BuildLibs.sh > BuildLibsNoWait.sh"
+    system "chmod a+x BuildLibsNoWait.sh"
     system "./BuildLibsNoWait.sh osx"
     system "cmake", "-DCMAKE_BUILD_TYPE=Releas", "-DSTATIC=1", ".", *std_cmake_args
     system "make", "install"
