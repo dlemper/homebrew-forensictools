@@ -8,22 +8,31 @@ class Xmount < Formula
 
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "cppunit" => :build
+  depends_on "cmake" => :build
+  depends_on "libtool" => :build
+  depends_on "readline" => :build
   depends_on "openssl@3"
-  depends_on "cppunit"
-  depends_on "autoconf"
-  depends_on "automake"
-  depends_on "cmake"
-  depends_on "libtool"
-  depends_on "readline"
+  depends_on "snappy"
+  depends_on "lz4"
+  depends_on "raptor"
+  depends_on "afflib"
+  depends_on "libxml2"
+  depends_on "libewf"
   #depends_on cask: "macfuse"
 
   def install
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@3"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["snappy"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["lz4"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["raptor"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["afflib"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["libxml2"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["libewf"].opt_lib/"pkgconfig"
 
-    system "grep -v 'read -p' BuildLibs.sh > BuildLibsNoWait.sh"
-    system "chmod a+x BuildLibsNoWait.sh"
-    system "./BuildLibsNoWait.sh osx"
-    system "cmake", "-DCMAKE_BUILD_TYPE=Releas", "-DSTATIC=1", ".", *std_cmake_args
+    system "cmake", "-DCMAKE_BUILD_TYPE=Releas", ".", *std_cmake_args
     system "make", "install"
   end
 
