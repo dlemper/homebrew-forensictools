@@ -20,7 +20,6 @@ class Xmount < Formula
   depends_on "afflib"
   depends_on "libewf"
   depends_on "openssl@3"
-  depends_on :osxfuse
 
   def install
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@3"].opt_lib/"pkgconfig"
