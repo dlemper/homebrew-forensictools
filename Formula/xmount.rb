@@ -15,12 +15,10 @@ class Xmount < Formula
   depends_on "libtool" => :build
   depends_on "readline" => :build
   depends_on "openssl@3"
-  depends_on "snappy"
   depends_on "lz4"
-  depends_on "raptor"
   depends_on "afflib"
-  depends_on "libxml2"
   depends_on "libewf"
+  depends_on "aff4-cpp-lite"
   #depends_on cask: "macfuse"
 
   def install
@@ -31,8 +29,9 @@ class Xmount < Formula
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["afflib"].opt_lib/"pkgconfig"
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["libxml2"].opt_lib/"pkgconfig"
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["libewf"].opt_lib/"pkgconfig"
+    ENV.append_path "PKG_CONFIG_PATH", "/usr/local/lib/pkgconfig"
 
-    system "cmake", "-DCMAKE_BUILD_TYPE=Releas", ".", *std_cmake_args
+    system "echo", "cmake", *std_cmake_args
     system "make", "install"
   end
 
