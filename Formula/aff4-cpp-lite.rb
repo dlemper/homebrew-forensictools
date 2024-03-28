@@ -1,9 +1,8 @@
 class Aff4CppLite < Formula
   desc "Advanced Forensic Format"
   homepage "https://github.com/aff4/aff4-cpp-lite"
-  url "https://github.com/aff4/aff4-cpp-lite.git"
+  url "https://github.com/aff4/aff4-cpp-lite/archive/refs/tags/v2.1.1-pre.tar.gz"
   license "LGPL-3.0-or-later"
-  revision 1
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
