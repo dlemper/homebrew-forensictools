@@ -21,8 +21,10 @@ class Aff4CppLite < Formula
     ENV["CXXFLAGS"] = "-fPIC -DO_LARGEFILE=0x0 -Dpread64=pread -std=c++11"
 
     system "sed", "-i.bak", "s#/opt/local#/opt/homebrew#", "autogen.sh"
+    system "sed", "-i.bak", 's#-export-symbols $(srcdir)/libaff4.sym##', "src/Makefile.am"
     system "./autogen.sh"
-    system "./configure", "--prefix="+self.prefix
+    system "./configure", "--disable-option-checking", *std_configure_args
+    system "make"
     system "make", "install"
   end
 end
